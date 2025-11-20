@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Библиотека - Главная</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Логотип библиотеки" class="logo-image">
+                </a>
+            </div>
+            <div class="auth-buttons">
+                <a href="pages/login.html" class="btn">Вход/регистрация</a>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">главная</a></li>
+                <li><a href="#">Личный кабинет</a></li>
+                <li><a href="pages/books.html">Книги</a></li>
+                <li><a href="pages/genres.html">Жанры</a></li>
+                <li><a href="pages/cart.html">Корзина</a></li>
+                <li><a href="pages/reviews.html">Отзывы</a></li>
+                <li><a href="#">Контактные данные</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="pages/books.html">Книги</a></li>
+                <li><a href="#">Дата выдачи/возврата</a></li>
+                <li><a href="pages/cart.html">Корзина</a></li>
+                <li><a href="#">Звонок в библиотеку</a></li>
+                <li><a href="#">Информация для юр. лиц</a></li>
+                <li><a href="pages/about.html">Сведения об организации</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <!-- СЛАЙДЕР ЗАМЕНИЛ СЕКЦИЮ С 4 КНОПКАМИ -->
+            <section class="genres-slider-section">
+                <h2>Самые популярные жанры</h2>
+                <div class="slider-container">
+                    <div class="slider-wrapper">
+                        <div class="slide active" data-slide="1">
+                            <div class="slide-image" onclick="goToGenre('modern')">
+                                <img src="images/modern-literature.jpg" alt="Современная литература">
+                                <div class="slide-overlay">
+                                    <span class="overlay-text">Смотреть книги</span>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <h3>СОВРЕМЕННАЯ ЛИТЕРАТУРА</h3>
+                                <p>Актуальные произведения современных авторов, отражающие проблемы и тенденции нашего времени. Откройте для себя новых талантливых писателей и свежие взгляды на современный мир.</p>
+                            </div>
+                        </div>
+
+                        <div class="slide" data-slide="2">
+                            <div class="slide-image" onclick="goToGenre('classic')">
+                                <img src="images/classic-literature.jpg" alt="Классическая литература">
+                                <div class="slide-overlay">
+                                    <span class="overlay-text">Смотреть книги</span>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <h3>КЛАССИЧЕСКАЯ ЛИТЕРАТУРА</h3>
+                                <p>Вечные произведения, которые прошли проверку временем. Шедевры мировой литературы, которые должен прочитать каждый образованный человек. Откройте для себя мудрость классиков.</p>
+                            </div>
+                        </div>
+
+                        <div class="slide" data-slide="3">
+                            <div class="slide-image" onclick="goToGenre('foreign')">
+                                <img src="images/foreign-literature.jpg" alt="Зарубежная литература">
+                                <div class="slide-overlay">
+                                    <span class="overlay-text">Смотреть книги</span>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <h3>ЗАРУБЕЖНАЯ ЛИТЕРАТУРА</h3>
+                                <p>Лучшие произведения авторов со всего мира. Погрузитесь в разные культуры и традиции через литературу. От скандинавских детективов до латиноамериканского магического реализма.</p>
+                            </div>
+                        </div>
+
+                        <div class="slide" data-slide="4">
+                            <div class="slide-image" onclick="goToGenre('russian')">
+                                <img src="images/russian-literature.jpg" alt="Русская литература">
+                                <div class="slide-overlay">
+                                    <span class="overlay-text">Смотреть книги</span>
+                                </div>
+                            </div>
+                            <div class="slide-content">
+                                <h3>РУССКАЯ ЛИТЕРАТУРА</h3>
+                                <p>Богатое наследие русских писателей, которое известно во всем мире. Глубокие психологические романы, поэзия, рассказы о русской душе и истории. От Пушкина до современных авторов.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Навигационные точки -->
+                    <div class="slider-nav">
+                        <button class="nav-dot active" data-slide="1"></button>
+                        <button class="nav-dot" data-slide="2"></button>
+                        <button class="nav-dot" data-slide="3"></button>
+                        <button class="nav-dot" data-slide="4"></button>
+                    </div>
+
+                    <!-- Кнопки навигации -->
+                    <button class="slider-btn prev-btn">‹</button>
+                    <button class="slider-btn next-btn">›</button>
+                </div>
+            </section>
+
+            <!-- ОСТАЛЬНОЙ КОНТЕНТ ОСТАЕТСЯ БЕЗ ИЗМЕНЕНИЙ -->
+            <section class="featured-authors">
+                <h2>АВТОРЫ, КОТОРЫХ ЧИТАЮТ ПО ВСЕМУ МИРУ</h2>
+                <div class="authors-list">
+                    <div class="author">Лев Толстой</div>
+                    <div class="author">Фёдор Достоевский</div>
+                    <div class="author">Антон Чехов</div>
+                    <div class="author">Эрнест Хемингуэй</div>
+                    <div class="author">Джоан Роулинг</div>
+                    <div class="author">Стивен Кинг</div>
+                </div>
+            </section>
+
+            <section class="new-arrivals">
+                <h2>НОВЫЕ ПОСТУПЛЕНИЯ</h2>
+                <div class="books-grid">
+                    <div class="book-item">
+                        <h4>Мастер и Маргарита</h4>
+                        <p>Михаил Булгаков</p>
+                    </div>
+                    <div class="book-item">
+                        <h4>1984</h4>
+                        <p>Джордж Оруэлл</p>
+                    </div>
+                    <div class="book-item">
+                        <h4>Тихий Дон</h4>
+                        <p>Михаил Шолохов</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2025 Библиотека Ростова-на-Дону. Все права защищены.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.nav-dot');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            let currentSlide = 0;
+
+            function showSlide(n) {
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                });
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+
+                if (n >= slides.length) {
+                    currentSlide = 0;
+                } else if (n < 0) {
+                    currentSlide = slides.length - 1;
+                } else {
+                    currentSlide = n;
+                }
+
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+
+            function prevSlide() {
+                showSlide(currentSlide - 1);
+            }
+
+            function initSlider() {
+                nextBtn.addEventListener('click', () => {
+                    nextSlide();
+                });
+
+                prevBtn.addEventListener('click', () => {
+                    prevSlide();
+                });
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        showSlide(index);
+                    });
+                });
+            }
+
+            initSlider();
+        });
+
+        // Функция для перехода на страницу книг с выбранным жанром
+        function goToGenre(genre) {
+            // Сохраняем выбранный жанр в sessionStorage
+            sessionStorage.setItem('selectedGenre', genre);
+            // Переходим на страницу книг
+            window.location.href = 'pages/books.html';
+        }
+
+        // Функция для получения параметров из URL (для books.html)
+        function getUrlParameter(name) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+            const results = regex.exec(window.location.search);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Если мы уже на странице books.html, применяем фильтр
+        if (window.location.pathname.includes('pages/books.html')) {
+            const genreFromUrl = getUrlParameter('genre');
+            if (genreFromUrl) {
+                applyGenreFilterFromUrl(genreFromUrl);
+            } else {
+                applyGenreFilterFromStorage();
+            }
+        }
+
+        // Функция для применения фильтра из URL параметров
+        function applyGenreFilterFromUrl(genreFromUrl) {
+            const genreMap = {
+                'modern': 'роман',
+                'classic': 'классика',
+                'foreign': 'зарубежная',
+                'russian': 'русская',
+                'detective': 'детектив',
+                'fantasy': 'фантастика',
+                'poetry': 'поэзия',
+                'science': 'научная'
+            };
+
+            const filterValue = genreMap[genreFromUrl] || genreFromUrl;
+
+            const genreFilter = document.getElementById('genre-filter');
+            if (genreFilter) {
+                genreFilter.value = filterValue;
+                if (typeof searchBooks === 'function') {
+                    searchBooks();
+                }
+            }
+        }
+
+        // Функция для применения фильтра из sessionStorage
+        function applyGenreFilterFromStorage() {
+            const savedGenre = sessionStorage.getItem('selectedGenre');
+            if (savedGenre) {
+                applyGenreFilterFromUrl(savedGenre);
+                // Очищаем storage после применения
+                sessionStorage.removeItem('selectedGenre');
+            }
+        }
+    </script>
+    <script>
+        // Функция для плавного перехода между страницами
+        function smoothNavigate(url) {
+            // Добавляем класс для анимации исчезновения
+            document.body.classList.add('page-exit');
+
+            // Ждем окончания анимации и переходим
+            setTimeout(() => {
+                window.location.href = url;
+            }, 400);
+        }
+
+        // Обработчик для всех внутренних ссылок
+        document.addEventListener('DOMContentLoaded', function () {
+            const allLinks = document.querySelectorAll('a[href]');
+
+            allLinks.forEach(link => {
+                const href = link.getAttribute('href');
+
+                // Проверяем, что это внутренняя ссылка (не внешняя и не якорь)
+                if (href &&
+                    !href.startsWith('http') &&
+                    !href.startsWith('//') &&
+                    !href.startsWith('#') &&
+                    !href.startsWith('javascript:') &&
+                    (href.endsWith('.html') || href === 'index.html' || href === '/')) {
+
+                    link.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        smoothNavigate(href);
+                    });
+                }
+            });
+
+            // Особые обработчики для кнопок жанров (если они есть на странице)
+            const genreButtons = document.querySelectorAll('.genre-button');
+            genreButtons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const genre = this.getAttribute('data-genre');
+                    if (genre) {
+                        sessionStorage.setItem('selectedGenre', genre);
+                    }
+                    smoothNavigate('books.html');
+                });
+            });
+
+            // Особые обработчики для изображений слайдера (если они есть на странице)
+            const slideImages = document.querySelectorAll('.slide-image');
+            slideImages.forEach(slide => {
+                slide.addEventListener('click', function () {
+                    const genre = this.getAttribute('onclick')?.match(/goToGenre\('([^']+)'\)/)?.[1];
+                    if (genre) {
+                        sessionStorage.setItem('selectedGenre', genre);
+                        smoothNavigate('pages/books.html');
+                    }
+                });
+            });
+        });
+
+        // Функция для обновления существующей функции goToGenre
+        if (typeof goToGenre === 'undefined') {
+            function goToGenre(genre) {
+                sessionStorage.setItem('selectedGenre', genre);
+                smoothNavigate('pages/books.html');
+            }
+        } else {
+            // Сохраняем старую функцию и создаем новую
+            const oldGoToGenre = goToGenre;
+            window.goToGenre = function (genre) {
+                sessionStorage.setItem('selectedGenre', genre);
+                smoothNavigate('pages/books.html');
+            };
+        }
+    </script>
+</body>
+</html>

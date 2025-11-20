@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сведения об организации - Библиотека</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/logo.png" alt="Логотип библиотеки" class="logo-image">
+                </a>
+            </div>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn">Вход/регистрация</a>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="../index.html">главная</a></li>
+                <li><a href="#">Личный кабинет</a></li>
+                <li><a href="books.html">Книги</a></li>
+                <li><a href="genres.html">Жанры</a></li>
+                <li><a href="cart.html">Корзина</a></li>
+                <li><a href="reviews.html">Отзывы</a></li>
+                <li><a href="#">Контактные данные</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="books.html">Книги</a></li>
+                <li><a href="#">Дата выдачи/возврата</a></li>
+                <li><a href="cart.html">Корзина</a></li>
+                <li><a href="#">Звонок в библиотеку</a></li>
+                <li><a href="#">Информация для юр. лиц</a></li>
+                <li><a href="about.html">Сведения об организации</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Сведения об организации</h1>
+
+            <div class="organization-info">
+                <h2>Центральная городская библиотека им. М. Горького</h2>
+                <p>Ростов-на-Дону</p>
+
+                <div class="info-section">
+                    <h3>История библиотеки</h3>
+                    <p>
+                        Основана в 1886 году. Является одной из старейших библиотек Юга России.
+                        За свою историю библиотека стала культурным и образовательным центром города.
+                    </p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Контактная информация</h3>
+                    <p><strong>Адрес:</strong> г. Ростов-на-Дону, ул. Пушкинская, 175а</p>
+                    <p><strong>Телефон:</strong> +7 (863) 262-05-84</p>
+                    <p><strong>Email:</strong> library@rostovlib.ru</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Режим работы</h3>
+                    <p><strong>Понедельник-пятница:</strong> 9:00 - 20:00</p>
+                    <p><strong>Суббота:</strong> 10:00 - 18:00</p>
+                    <p><strong>Воскресенье:</strong> 10:00 - 17:00</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>Фонд библиотеки</h3>
+                    <ul>
+                        <li>Более 200,000 книг</li>
+                        <li>Электронные издания: 50,000+</li>
+                        <li>Периодические издания: 200+ наименований</li>
+                        <li>Аудиокниги и мультимедиа</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Услуги</h3>
+                    <ul>
+                        <li>Выдача книг на дом</li>
+                        <li>Читальный зал</li>
+                        <li>Электронный каталог</li>
+                        <li>Межбиблиотечный абонемент</li>
+                        <li>Копирование и сканирование</li>
+                        <li>Компьютерный зал</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Руководство</h3>
+                    <p><strong>Директор:</strong> Иванова Мария Петровна</p>
+                    <p><strong>Заместитель директора:</strong> Сидоров Алексей Владимирович</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2025 Библиотека Ростова-на-Дону. Все права защищены.</p>
+    </footer>
+    <script>
+    // Функция для плавного перехода между страницами
+    function smoothNavigate(url) {
+        // Добавляем класс для анимации исчезновения
+        document.body.classList.add('page-exit');
+
+        // Ждем окончания анимации и переходим
+        setTimeout(() => {
+            window.location.href = url;
+        }, 400);
+    }
+
+    // Обработчик для всех внутренних ссылок
+    document.addEventListener('DOMContentLoaded', function() {
+        const allLinks = document.querySelectorAll('a[href]');
+
+        allLinks.forEach(link => {
+            const href = link.getAttribute('href');
+
+            // Проверяем, что это внутренняя ссылка (не внешняя и не якорь)
+            if (href &&
+                !href.startsWith('http') &&
+                !href.startsWith('//') &&
+                !href.startsWith('#') &&
+                !href.startsWith('javascript:') &&
+                (href.endsWith('.html') || href === 'index.html' || href === '/')) {
+
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    smoothNavigate(href);
+                });
+            }
+        });
+
+        // Особые обработчики для кнопок жанров (если они есть на странице)
+        const genreButtons = document.querySelectorAll('.genre-button');
+        genreButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const genre = this.getAttribute('data-genre');
+                if (genre) {
+                    sessionStorage.setItem('selectedGenre', genre);
+                }
+                smoothNavigate('books.html');
+            });
+        });
+
+        // Особые обработчики для изображений слайдера (если они есть на странице)
+        const slideImages = document.querySelectorAll('.slide-image');
+        slideImages.forEach(slide => {
+            slide.addEventListener('click', function() {
+                const genre = this.getAttribute('onclick')?.match(/goToGenre\('([^']+)'\)/)?.[1];
+                if (genre) {
+                    sessionStorage.setItem('selectedGenre', genre);
+                    smoothNavigate('books.html');
+                }
+            });
+        });
+    });
+
+    // Функция для обновления существующей функции goToGenre
+    if (typeof goToGenre === 'undefined') {
+        function goToGenre(genre) {
+            sessionStorage.setItem('selectedGenre', genre);
+            smoothNavigate('books.html');
+        }
+    } else {
+        // Сохраняем старую функцию и создаем новую
+        const oldGoToGenre = goToGenre;
+        window.goToGenre = function(genre) {
+            sessionStorage.setItem('selectedGenre', genre);
+            smoothNavigate('books.html');
+        };
+    }
+    </script>
+</body>
+</html>

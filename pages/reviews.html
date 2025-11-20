@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отзывы - Библиотека</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/logo.png" alt="Логотип библиотеки" class="logo-image">
+                </a>
+            </div>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn">Вход/регистрация</a>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="../index.html">главная</a></li>
+                <li><a href="#">Личный кабинет</a></li>
+                <li><a href="books.html">Книги</a></li>
+                <li><a href="genres.html">Жанры</a></li>
+                <li><a href="cart.html">Корзина</a></li>
+                <li><a href="reviews.html">Отзывы</a></li>
+                <li><a href="#">Контактные данные</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="books.html">Книги</a></li>
+                <li><a href="#">Дата выдачи/возврата</a></li>
+                <li><a href="cart.html">Корзина</a></li>
+                <li><a href="#">Звонок в библиотеку</a></li>
+                <li><a href="#">Информация для юр. лиц</a></li>
+                <li><a href="about.html">Сведения об организации</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Отзывы о библиотеке</h1>
+
+            <!-- Форма добавления отзыва -->
+            <div class="review-form-section">
+                <h2>Оставить отзыв</h2>
+                <div class="review-form">
+                    <div class="form-group">
+                        <label for="review-nickname">Ваш никнейм:</label>
+                        <input type="text" id="review-nickname" placeholder="Введите ваш никнейм" maxlength="30">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Оценка:</label>
+                        <div class="rating-stars">
+                            <input type="radio" id="star5" name="rating" value="5">
+                            <label for="star5">★</label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4">★</label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3">★</label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2">★</label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1">★</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="review-text">Текст отзыва:</label>
+                        <textarea id="review-text" placeholder="Напишите ваш отзыв здесь..." rows="5" maxlength="500"></textarea>
+                        <div class="char-counter"><span id="char-count">0</span>/500 символов</div>
+                    </div>
+
+                    <button class="submit-review-btn" onclick="submitReview()">Опубликовать отзыв</button>
+                </div>
+            </div>
+
+            <!-- Фильтры и статистика -->
+            <div class="reviews-filter-section">
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <label>Сортировка:</label>
+                        <select id="reviews-sort" onchange="applyFilters()">
+                            <option value="newest">Сначала новые</option>
+                            <option value="oldest">Сначала старые</option>
+                            <option value="highest">Сначала с высокой оценкой</option>
+                            <option value="lowest">Сначала с низкой оценкой</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Фильтр по оценке:</label>
+                        <select id="reviews-rating-filter" onchange="applyFilters()">
+                            <option value="all">Все оценки</option>
+                            <option value="5">★ 5 звезд</option>
+                            <option value="4">★ 4 звезды</option>
+                            <option value="3">★ 3 звезды</option>
+                            <option value="2">★ 2 звезды</option>
+                            <option value="1">★ 1 звезда</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="reviews-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="total-reviews">0</span>
+                        <span class="stat-label">Всего отзывов</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="average-rating">0.0</span>
+                        <span class="stat-label">Средняя оценка</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="five-star-reviews">0</span>
+                        <span class="stat-label">5-звездочных</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Список отзывов -->
+            <div class="reviews-list" id="reviews-list">
+                <!-- Отзывы будут добавляться динамически -->
+            </div>
+
+            <!-- Сообщение если отзывов нет -->
+            <div id="no-reviews" class="no-reviews-message">
+                <h3>Пока нет отзывов</h3>
+                <p>Будьте первым, кто оставит отзыв о нашей библиотеке!</p>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2024 Библиотека Ростова-на-Дону. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Инициализация данных отзывов
+        let reviews = JSON.parse(localStorage.getItem('libraryReviews')) || [];
+
+        
+
+        // Функция для отображения отзывов
+        function displayReviews() {
+            const reviewsList = document.getElementById('reviews-list');
+            const noReviews = document.getElementById('no-reviews');
+
+            if (reviews.length === 0) {
+                reviewsList.innerHTML = '';
+                noReviews.style.display = 'block';
+                return;
+            }
+
+            noReviews.style.display = 'none';
+
+            // Применяем фильтры
+            const filteredReviews = applyFiltersToReviews(reviews);
+
+            reviewsList.innerHTML = filteredReviews.map(review => `
+                    <div class="review-item" data-rating="${review.rating}">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <span class="reviewer-nickname">${review.nickname}</span>
+                                <span class="review-date">${formatDate(review.date)}</span>
+                            </div>
+                            <div class="review-rating">
+                                ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}
+                                <span class="rating-number">${review.rating}.0</span>
+                            </div>
+                        </div>
+                        <div class="review-text">
+                            ${review.text}
+                        </div>
+                        <div class="review-actions">
+                            <button class="like-btn" onclick="likeReview(${review.id})">
+                                👍 <span class="like-count">${review.likes || 0}</span>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+
+            updateStatistics();
+        }
+
+        // Функция применения фильтров
+        function applyFiltersToReviews(reviewsList) {
+            const sortBy = document.getElementById('reviews-sort').value;
+            const ratingFilter = document.getElementById('reviews-rating-filter').value;
+
+            let filtered = reviewsList.slice();
+
+            // Фильтрация по оценке
+            if (ratingFilter !== 'all') {
+                filtered = filtered.filter(review => review.rating == ratingFilter);
+            }
+
+            // Сортировка
+            switch (sortBy) {
+                case 'newest':
+                    filtered.sort((a, b) => b.timestamp - a.timestamp);
+                    break;
+                case 'oldest':
+                    filtered.sort((a, b) => a.timestamp - b.timestamp);
+                    break;
+                case 'highest':
+                    filtered.sort((a, b) => b.rating - a.rating || b.timestamp - a.timestamp);
+                    break;
+                case 'lowest':
+                    filtered.sort((a, b) => a.rating - b.rating || b.timestamp - a.timestamp);
+                    break;
+            }
+
+            return filtered;
+        }
+
+        // Функция применения фильтров (вызывается при изменении фильтров)
+        function applyFilters() {
+            displayReviews();
+        }
+
+        // Функция отправки отзыва
+        function submitReview() {
+            const nickname = document.getElementById('review-nickname').value.trim();
+            const rating = document.querySelector('input[name="rating"]:checked');
+            const text = document.getElementById('review-text').value.trim();
+
+            if (!nickname) {
+                alert('Пожалуйста, введите ваш никнейм');
+                return;
+            }
+
+            if (!rating) {
+                alert('Пожалуйста, поставьте оценку');
+                return;
+            }
+
+            if (!text) {
+                alert('Пожалуйста, напишите текст отзыва');
+                return;
+            }
+
+            const newReview = {
+                id: Date.now(),
+                nickname: nickname,
+                rating: parseInt(rating.value),
+                text: text,
+                date: new Date().toISOString(),
+                timestamp: Date.now(),
+                likes: 0
+            };
+
+            reviews.unshift(newReview);
+            localStorage.setItem('libraryReviews', JSON.stringify(reviews));
+
+            // Очищаем форму
+            document.getElementById('review-nickname').value = '';
+            document.querySelectorAll('input[name="rating"]').forEach(radio => radio.checked = false);
+            document.getElementById('review-text').value = '';
+            document.getElementById('char-count').textContent = '0';
+
+            displayReviews();
+            alert('Спасибо за ваш отзыв!');
+        }
+
+        // Функция лайка отзыва
+        function likeReview(reviewId) {
+            const review = reviews.find(r => r.id === reviewId);
+            if (review) {
+                review.likes = (review.likes || 0) + 1;
+                localStorage.setItem('libraryReviews', JSON.stringify(reviews));
+                displayReviews();
+            }
+        }
+
+        // Функция обновления статистики
+        function updateStatistics() {
+            const totalReviews = reviews.length;
+            const averageRating = totalReviews > 0
+                ? (reviews.reduce((sum, review) => sum + review.rating, 0) / totalReviews).toFixed(1)
+                : '0.0';
+            const fiveStarReviews = reviews.filter(review => review.rating === 5).length;
+
+            document.getElementById('total-reviews').textContent = totalReviews;
+            document.getElementById('average-rating').textContent = averageRating;
+            document.getElementById('five-star-reviews').textContent = fiveStarReviews;
+        }
+
+        // Функция форматирования даты
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+            if (diffDays === 0) {
+                return 'Сегодня';
+            } else if (diffDays === 1) {
+                return 'Вчера';
+            } else if (diffDays < 7) {
+                return `${diffDays} дня назад`;
+            } else {
+                return date.toLocaleDateString('ru-RU', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+            }
+        }
+
+        // Обработчик счетчика символов
+        document.getElementById('review-text').addEventListener('input', function () {
+            document.getElementById('char-count').textContent = this.value.length;
+        });
+
+        // Функция для плавного перехода между страницами
+        function smoothNavigate(url) {
+            document.body.classList.add('page-exit');
+            setTimeout(() => {
+                window.location.href = url;
+            }, 400);
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function () {
+            displayReviews();
+
+            // Обработчик для всех внутренних ссылок
+            const allLinks = document.querySelectorAll('a[href]');
+
+            allLinks.forEach(link => {
+                const href = link.getAttribute('href');
+
+                if (href &&
+                    !href.startsWith('http') &&
+                    !href.startsWith('//') &&
+                    !href.startsWith('#') &&
+                    !href.startsWith('javascript:') &&
+                    (href.endsWith('.html') || href === 'index.html' || href === '/')) {
+
+                    link.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        smoothNavigate(href);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

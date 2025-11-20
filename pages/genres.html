@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жанры - Библиотека</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/logo.png" alt="Логотип библиотеки" class="logo-image">
+                </a>
+            </div>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn">Вход/регистрация</a>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="../index.html">главная</a></li>
+                <li><a href="#">Личный кабинет</a></li>
+                <li><a href="books.html">Книги</a></li>
+                <li><a href="genres.html">Жанры</a></li>
+                <li><a href="cart.html">Корзина</a></li>
+                <li><a href="reviews.html">Отзывы</a></li>
+                <li><a href="#">Контактные данные</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="books.html">Книги</a></li>
+                <li><a href="#">Дата выдачи/возврата</a></li>
+                <li><a href="cart.html">Корзина</a></li>
+                <li><a href="#">Звонок в библиотеку</a></li>
+                <li><a href="#">Информация для юр. лиц</a></li>
+                <li><a href="about.html">Сведения об организации</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Жанры литературы</h1>
+
+            <div class="genres-buttons-grid">
+                <div class="genre-button-item">
+                    <button class="genre-button" data-genre="modern" onclick="goToGenre('modern')">
+                        СОВРЕМЕННАЯ ЛИТЕРАТУРА
+                    </button>
+                    <div class="genre-description">
+                        <p>Актуальные произведения современных авторов, отражающие проблемы и тенденции нашего времени. Откройте для себя новых талантливых писателей и свежие взгляды на современный мир.</p>
+                        <p><strong>Популярные авторы:</strong> Виктор Пелевин, Людмила Улицкая, Захар Прилепин</p>
+                    </div>
+                </div>
+
+                <div class="genre-button-item">
+                    <button class="genre-button" data-genre="classic" onclick="goToGenre('classic')">
+                        КЛАССИЧЕСКАЯ ЛИТЕРАТУРА
+                    </button>
+                    <div class="genre-description">
+                        <p>Вечные произведения, которые прошли проверку временем. Шедевры мировой литературы, которые должен прочитать каждый образованный человек. Откройте для себя мудрость классиков.</p>
+                        <p><strong>Популярные авторы:</strong> Лев Толстой, Фёдор Достоевский, Антон Чехов</p>
+                    </div>
+                </div>
+
+                <div class="genre-button-item">
+                    <button class="genre-button" data-genre="foreign" onclick="goToGenre('foreign')">
+                        ЗАРУБЕЖНАЯ ЛИТЕРАТУРА
+                    </button>
+                    <div class="genre-description">
+                        <p>Лучшие произведения авторов со всего мира. Погрузитесь в разные культуры и традиции через литературу. От скандинавских детективов до латиноамериканского магического реализма.</p>
+                        <p><strong>Популярные авторы:</strong> Эрнест Хемингуэй, Габриэль Гарсиа Маркес, Харуки Мураками</p>
+                    </div>
+                </div>
+
+                <div class="genre-button-item">
+                    <button class="genre-button" data-genre="russian" onclick="goToGenre('russian')">
+                        РУССКАЯ ЛИТЕРАТУРА
+                    </button>
+                    <div class="genre-description">
+                        <p>Богатейшее наследие русских писателей, которое известно во всем мире. Глубокие психологические романы, поэзия, рассказы о русской душе и истории. От Пушкина до современных авторов.</p>
+                        <p><strong>Популярные авторы:</strong> Александр Пушкин, Николай Гоголь, Иван Тургенев</p>
+                    </div>
+                </div>
+
+                <div class="genre-button-item">
+                    <button class="genre-button" data-genre="detective" onclick="goToGenre('detective')">
+                        ДЕТЕКТИВЫ И ТРИЛЛЕРЫ
+                    </button>
+                    <div class="genre-description">
+                        <p>Захватывающие истории с интригующими сюжетами, расследованиями и неожиданными развязками.</p>
+                        <p><strong>Популярные авторы:</strong> Агата Кристи, Борис Акунин, Дэн Браун</p>
+                    </div>
+                </div>
+
+                <div class="genre-button-item">
+                    <button class="genre-button" data-genre="fantasy" onclick="goToGenre('fantasy')">
+                        ФАНТАСТИКА И ФЭНТЕЗИ
+                    </button>
+                    <div class="genre-description">
+                        <p>Миры, выходящие за рамки привычной реальности, с элементами вымысла, магии и технологий будущего.</p>
+                        <p><strong>Популярные авторы:</strong> Джон Толкин, Айзек Азимов, Сергей Лукьяненко</p>
+                    </div>
+                </div>
+
+                <div class="genre-button-item">
+                    <button class="genre-button" data-genre="poetry" onclick="goToGenre('poetry')">
+                        ПОЭЗИЯ
+                    </button>
+                    <div class="genre-description">
+                        <p>Выразительные художественные произведения в стихотворной форме, передающие глубину чувств и эмоций.</p>
+                        <p><strong>Популярные авторы:</strong> Анна Ахматова, Владимир Маяковский, Иосиф Бродский</p>
+                    </div>
+                </div>
+
+                <div class="genre-button-item">
+                    <button class="genre-button" data-genre="science" onclick="goToGenre('science')">
+                        НАУЧНАЯ ЛИТЕРАТУРА
+                    </button>
+                    <div class="genre-description">
+                        <p>Произведения, основанные на научных исследованиях и фактах, охватывающие различные области знаний.</p>
+                        <p><strong>Популярные авторы:</strong> Стивен Хокинг, Карл Саган, Юваль Ной Харари</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+    </main>
+    </div>
+
+    <footer>
+        <p>© 2025 Библиотека Ростова-на-Дону. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Добавляем обработчики для показа описания при наведении
+        document.addEventListener('DOMContentLoaded', function () {
+            const genreItems = document.querySelectorAll('.genre-button-item');
+
+            genreItems.forEach(item => {
+                const button = item.querySelector('.genre-button');
+                const description = item.querySelector('.genre-description');
+
+                // Показываем описание при наведении на кнопку
+                button.addEventListener('mouseenter', function () {
+                    description.style.opacity = '1';
+                    description.style.visibility = 'visible';
+                    description.style.transform = 'translateY(0)';
+                });
+
+                // Скрываем описание когда убираем курсор
+                item.addEventListener('mouseleave', function () {
+                    description.style.opacity = '0';
+                    description.style.visibility = 'hidden';
+                    description.style.transform = 'translateY(10px)';
+                });
+            });
+        });
+    </script>
+    <script>
+        // Функция для перехода на страницу книг с выбранным жанром
+        function goToGenre(genre) {
+            // Сохраняем выбранный жанр в sessionStorage
+            sessionStorage.setItem('selectedGenre', genre);
+            // Переходим на страницу книг
+            window.location.href = 'books.html';
+        }
+
+        // Добавляем обработчики для показа описания при наведении
+        document.addEventListener('DOMContentLoaded', function () {
+            const genreItems = document.querySelectorAll('.genre-button-item');
+
+            genreItems.forEach(item => {
+                const button = item.querySelector('.genre-button');
+                const description = item.querySelector('.genre-description');
+
+                // Показываем описание при наведении на кнопку
+                button.addEventListener('mouseenter', function () {
+                    description.style.opacity = '1';
+                    description.style.visibility = 'visible';
+                    description.style.transform = 'translateY(0)';
+                });
+
+                // Скрываем описание когда убираем курсор
+                item.addEventListener('mouseleave', function () {
+                    description.style.opacity = '0';
+                    description.style.visibility = 'hidden';
+                    description.style.transform = 'translateY(10px)';
+                });
+            });
+        });
+    </script>
+    <script>
+        // Функция для плавного перехода между страницами
+        function smoothNavigate(url) {
+            // Добавляем класс для анимации исчезновения
+            document.body.classList.add('page-exit');
+
+            // Ждем окончания анимации и переходим
+            setTimeout(() => {
+                window.location.href = url;
+            }, 400);
+        }
+
+        // Обработчик для всех внутренних ссылок
+        document.addEventListener('DOMContentLoaded', function () {
+            const allLinks = document.querySelectorAll('a[href]');
+
+            allLinks.forEach(link => {
+                const href = link.getAttribute('href');
+
+                // Проверяем, что это внутренняя ссылка (не внешняя и не якорь)
+                if (href &&
+                    !href.startsWith('http') &&
+                    !href.startsWith('//') &&
+                    !href.startsWith('#') &&
+                    !href.startsWith('javascript:') &&
+                    (href.endsWith('.html') || href === 'index.html' || href === '/')) {
+
+                    link.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        smoothNavigate(href);
+                    });
+                }
+            });
+
+            // Особые обработчики для кнопок жанров (если они есть на странице)
+            const genreButtons = document.querySelectorAll('.genre-button');
+            genreButtons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const genre = this.getAttribute('data-genre');
+                    if (genre) {
+                        sessionStorage.setItem('selectedGenre', genre);
+                    }
+                    smoothNavigate('books.html');
+                });
+            });
+
+            // Особые обработчики для изображений слайдера (если они есть на странице)
+            const slideImages = document.querySelectorAll('.slide-image');
+            slideImages.forEach(slide => {
+                slide.addEventListener('click', function () {
+                    const genre = this.getAttribute('onclick')?.match(/goToGenre\('([^']+)'\)/)?.[1];
+                    if (genre) {
+                        sessionStorage.setItem('selectedGenre', genre);
+                        smoothNavigate('books.html');
+                    }
+                });
+            });
+        });
+
+        // Функция для обновления существующей функции goToGenre
+        if (typeof goToGenre === 'undefined') {
+            function goToGenre(genre) {
+                sessionStorage.setItem('selectedGenre', genre);
+                smoothNavigate('books.html');
+            }
+        } else {
+            // Сохраняем старую функцию и создаем новую
+            const oldGoToGenre = goToGenre;
+            window.goToGenre = function (genre) {
+                sessionStorage.setItem('selectedGenre', genre);
+                smoothNavigate('books.html');
+            };
+        }
+    </script>
+</body>
+</html>

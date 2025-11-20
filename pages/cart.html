@@ -1,0 +1,413 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина - Библиотека</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/logo.png" alt="Логотип библиотеки" class="logo-image">
+                </a>
+            </div>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn">Вход/регистрация</a>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="../index.html">главная</a></li>
+                <li><a href="#">Личный кабинет</a></li>
+                <li><a href="books.html">Книги</a></li>
+                <li><a href="genres.html">Жанры</a></li>
+                <li><a href="cart.html">Корзина</a></li>
+                <li><a href="reviews.html">Отзывы</a></li>
+                <li><a href="#">Контактные данные</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="books.html">Книги</a></li>
+                <li><a href="#">Дата выдачи/возврата</a></li>
+                <li><a href="cart.html">Корзина</a></li>
+                <li><a href="#">Звонок в библиотеку</a></li>
+                <li><a href="#">Информация для юр. лиц</a></li>
+                <li><a href="about.html">Сведения об организации</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Моя корзина</h1>
+
+            <!-- Фильтры для корзины -->
+            <div class="cart-filter">
+                <h3>Фильтры корзины</h3>
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label>Жанр</label>
+                        <select id="cart-genre-filter">
+                            <option value="">Все жанры</option>
+                            <option value="современная">Современная литература</option>
+                            <option value="классика">Классическая литература</option>
+                            <option value="зарубежная">Зарубежная литература</option>
+                            <option value="русская">Русская литература</option>
+                            <option value="роман">Роман (все виды)</option>
+                            <option value="детектив">Детективы</option>
+                            <option value="фантастика">Фантастика</option>
+                            <option value="фэнтези">Фэнтези</option>
+                            <option value="поэзия">Поэзия</option>
+                            <option value="научная">Научная литература</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Дата добавления</label>
+                        <select id="cart-date-filter">
+                            <option value="all">Все книги</option>
+                            <option value="today">Сегодня</option>
+                            <option value="week">За последнюю неделю</option>
+                            <option value="month">За последний месяц</option>
+                            <option value="older">Ранее</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Статус</label>
+                        <select id="cart-status-filter">
+                            <option value="all">Все статусы</option>
+                            <option value="reserved">Забронированы</option>
+                            <option value="ready">Готовы к выдаче</option>
+                            <option value="issued">Выданы</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filter-actions">
+                    <button onclick="applyCartFilters()" class="apply-btn">Применить фильтры</button>
+                    <button onclick="resetCartFilters()" class="reset-btn">Сбросить фильтры</button>
+                </div>
+            </div>
+
+            <!-- Статистика корзины -->
+            <div class="cart-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="total-books">0</span>
+                    <span class="stat-label">Всего книг</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="reserved-books">0</span>
+                    <span class="stat-label">Забронировано</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="ready-books">0</span>
+                    <span class="stat-label">Готовы к выдаче</span>
+                </div>
+            </div>
+
+            <!-- Список книг в корзине -->
+            <div class="cart-items-grid">
+                <!-- Пример книги в корзине -->
+                <div class="cart-item" data-genre="классика" data-added="2024-01-15" data-status="ready">
+                    <div class="cart-item-image" style="background-image: url('../images/books/crime-and-punishment.jpg');"></div>
+                    <div class="cart-item-content">
+                        <h4>Преступление и наказание</h4>
+                        <p class="cart-item-author"><strong>Автор:</strong> Фёдор Достоевский</p>
+                        <p class="cart-item-genre"><strong>Жанр:</strong> Классическая литература, Роман</p>
+                        <p class="cart-item-added"><strong>Добавлено:</strong> 15 января 2024</p>
+                        <p class="cart-item-status ready"><strong>Статус:</strong> Готов к выдаче</p>
+                        <div class="cart-item-actions">
+                            <button class="action-btn borrow-btn">Забронировать</button>
+                            <button class="action-btn remove-btn">Удалить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-item" data-genre="фантастика" data-added="2024-01-10" data-status="reserved">
+                    <div class="cart-item-image" style="background-image: url('../images/books/1984.jpg');"></div>
+                    <div class="cart-item-content">
+                        <h4>1984</h4>
+                        <p class="cart-item-author"><strong>Автор:</strong> Джордж Оруэлл</p>
+                        <p class="cart-item-genre"><strong>Жанр:</strong> Фантастика, Антиутопия</p>
+                        <p class="cart-item-added"><strong>Добавлено:</strong> 10 января 2024</p>
+                        <p class="cart-item-status reserved"><strong>Статус:</strong> Забронировано</p>
+                        <div class="cart-item-actions">
+                            <button class="action-btn cancel-btn">Отменить бронь</button>
+                            <button class="action-btn remove-btn">Удалить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-item" data-genre="современная" data-added="2024-01-20" data-status="issued">
+                    <div class="cart-item-image" style="background-image: url('../images/books/lavr.jpg');"></div>
+                    <div class="cart-item-content">
+                        <h4>Лавр</h4>
+                        <p class="cart-item-author"><strong>Автор:</strong> Евгений Водолазкин</p>
+                        <p class="cart-item-genre"><strong>Жанр:</strong> Современная литература, Роман</p>
+                        <p class="cart-item-added"><strong>Добавлено:</strong> 20 января 2024</p>
+                        <p class="cart-item-status issued"><strong>Статус:</strong> Выдано (до 27.01.2024)</p>
+                        <div class="cart-item-actions">
+                            <button class="action-btn extend-btn">Продлить</button>
+                            <button class="action-btn return-btn">Вернуть</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-item" data-genre="детектив" data-added="2024-01-05" data-status="ready">
+                    <div class="cart-item-image" style="background-image: url('../images/books/murder-orient-express.jpg');"></div>
+                    <div class="cart-item-content">
+                        <h4>Убийство в Восточном экспрессе</h4>
+                        <p class="cart-item-author"><strong>Автор:</strong> Агата Кристи</p>
+                        <p class="cart-item-genre"><strong>Жанр:</strong> Детектив</p>
+                        <p class="cart-item-added"><strong>Добавлено:</strong> 5 января 2024</p>
+                        <p class="cart-item-status ready"><strong>Статус:</strong> Готов к выдаче</p>
+                        <div class="cart-item-actions">
+                            <button class="action-btn borrow-btn">Забронировать</button>
+                            <button class="action-btn remove-btn">Удалить</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-item" data-genre="русская" data-added="2023-12-15" data-status="issued">
+                    <div class="cart-item-image" style="background-image: url('../images/books/master-and-margarita.jpg');"></div>
+                    <div class="cart-item-content">
+                        <h4>Мастер и Маргарита</h4>
+                        <p class="cart-item-author"><strong>Автор:</strong> Михаил Булгаков</p>
+                        <p class="cart-item-genre"><strong>Жанр:</strong> Русская литература, Роман</p>
+                        <p class="cart-item-added"><strong>Добавлено:</strong> 15 декабря 2023</p>
+                        <p class="cart-item-status issued"><strong>Статус:</strong> Выдано (до 22.01.2024)</p>
+                        <div class="cart-item-actions">
+                            <button class="action-btn extend-btn">Продлить</button>
+                            <button class="action-btn return-btn">Вернуть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Сообщение если корзина пуста -->
+            <div id="empty-cart" style="display: none; text-align: center; padding: 3rem; background: white; border-radius: 8px;">
+                <h3>Корзина пуста</h3>
+                <p>Добавьте книги из каталога в свою корзину</p>
+                <a href="books.html" class="btn" style="margin-top: 1rem;">Перейти к книгам</a>
+            </div>
+
+            <!-- Кнопки действий с корзиной -->
+            <div class="cart-actions">
+                <button class="primary-btn" onclick="reserveAllReady()">Забронировать все готовые</button>
+                <button class="secondary-btn" onclick="clearCart()">Очистить корзину</button>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2024 Библиотека Ростова-на-Дону. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Функция для применения фильтров корзины
+        function applyCartFilters() {
+            const genreFilter = document.getElementById('cart-genre-filter').value.toLowerCase();
+            const dateFilter = document.getElementById('cart-date-filter').value;
+            const statusFilter = document.getElementById('cart-status-filter').value;
+
+            const cartItems = document.querySelectorAll('.cart-item');
+            let visibleCount = 0;
+            let reservedCount = 0;
+            let readyCount = 0;
+
+            // Получаем текущую дату для фильтрации
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            const weekAgo = new Date(today);
+            weekAgo.setDate(weekAgo.getDate() - 7);
+            const monthAgo = new Date(today);
+            monthAgo.setDate(monthAgo.getDate() - 30);
+
+            cartItems.forEach(item => {
+                const itemGenre = item.getAttribute('data-genre').toLowerCase();
+                const itemAdded = new Date(item.getAttribute('data-added'));
+                const itemStatus = item.getAttribute('data-status');
+
+                // Проверка жанра
+                const genreMatch = !genreFilter ||
+                    (genreFilter === 'роман' ? itemGenre.includes('роман') : itemGenre.includes(genreFilter));
+
+                // Проверка даты
+                let dateMatch = true;
+                if (dateFilter !== 'all') {
+                    switch (dateFilter) {
+                        case 'today':
+                            dateMatch = itemAdded >= today;
+                            break;
+                        case 'week':
+                            dateMatch = itemAdded >= weekAgo;
+                            break;
+                        case 'month':
+                            dateMatch = itemAdded >= monthAgo;
+                            break;
+                        case 'older':
+                            dateMatch = itemAdded < monthAgo;
+                            break;
+                    }
+                }
+
+                // Проверка статуса
+                const statusMatch = statusFilter === 'all' || itemStatus === statusFilter;
+
+                if (genreMatch && dateMatch && statusMatch) {
+                    item.style.display = 'flex';
+                    visibleCount++;
+
+                    // Считаем статистику
+                    if (itemStatus === 'reserved') reservedCount++;
+                    if (itemStatus === 'ready') readyCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Обновляем статистику
+            document.getElementById('total-books').textContent = visibleCount;
+            document.getElementById('reserved-books').textContent = reservedCount;
+            document.getElementById('ready-books').textContent = readyCount;
+
+            // Показываем сообщение если корзина пуста
+            const emptyCart = document.getElementById('empty-cart');
+            const cartActions = document.querySelector('.cart-actions');
+
+            if (visibleCount === 0) {
+                emptyCart.style.display = 'block';
+                if (cartActions) cartActions.style.display = 'none';
+            } else {
+                emptyCart.style.display = 'none';
+                if (cartActions) cartActions.style.display = 'flex';
+            }
+        }
+
+        // Функция сброса фильтров корзины
+        function resetCartFilters() {
+            document.getElementById('cart-genre-filter').value = '';
+            document.getElementById('cart-date-filter').value = 'all';
+            document.getElementById('cart-status-filter').value = 'all';
+            applyCartFilters();
+        }
+
+        // Функция бронирования всех готовых книг
+        function reserveAllReady() {
+            const readyItems = document.querySelectorAll('.cart-item[data-status="ready"]');
+            readyItems.forEach(item => {
+                item.setAttribute('data-status', 'reserved');
+                const statusElement = item.querySelector('.cart-item-status');
+                statusElement.textContent = 'Статус: Забронировано';
+                statusElement.className = 'cart-item-status reserved';
+
+                const actions = item.querySelector('.cart-item-actions');
+                actions.innerHTML = `
+                    <button class="action-btn cancel-btn">Отменить бронь</button>
+                    <button class="action-btn remove-btn">Удалить</button>
+                `;
+            });
+            applyCartFilters();
+            alert('Все готовые книги забронированы!');
+        }
+
+        // Функция очистки корзины
+        function clearCart() {
+            if (confirm('Вы уверены, что хотите очистить корзину?')) {
+                const cartItems = document.querySelectorAll('.cart-item');
+                cartItems.forEach(item => item.remove());
+                applyCartFilters();
+            }
+        }
+
+        // Обработчики для кнопок действий
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация статистики
+            applyCartFilters();
+
+            // Делегирование событий для динамических кнопок
+            document.addEventListener('click', function(e) {
+                const item = e.target.closest('.cart-item');
+
+                if (e.target.classList.contains('remove-btn')) {
+                    if (confirm('Удалить книгу из корзины?')) {
+                        item.remove();
+                        applyCartFilters();
+                    }
+                }
+                else if (e.target.classList.contains('borrow-btn')) {
+                    item.setAttribute('data-status', 'reserved');
+                    const statusElement = item.querySelector('.cart-item-status');
+                    statusElement.textContent = 'Статус: Забронировано';
+                    statusElement.className = 'cart-item-status reserved';
+
+                    const actions = item.querySelector('.cart-item-actions');
+                    actions.innerHTML = `
+                        <button class="action-btn cancel-btn">Отменить бронь</button>
+                        <button class="action-btn remove-btn">Удалить</button>
+                    `;
+                    applyCartFilters();
+                    alert('Книга забронирована!');
+                }
+                else if (e.target.classList.contains('cancel-btn')) {
+                    item.setAttribute('data-status', 'ready');
+                    const statusElement = item.querySelector('.cart-item-status');
+                    statusElement.textContent = 'Статус: Готов к выдаче';
+                    statusElement.className = 'cart-item-status ready';
+
+                    const actions = item.querySelector('.cart-item-actions');
+                    actions.innerHTML = `
+                        <button class="action-btn borrow-btn">Забронировать</button>
+                        <button class="action-btn remove-btn">Удалить</button>
+                    `;
+                    applyCartFilters();
+                    alert('Бронь отменена!');
+                }
+                else if (e.target.classList.contains('return-btn')) {
+                    if (confirm('Подтвердить возврат книги?')) {
+                        item.remove();
+                        applyCartFilters();
+                        alert('Книга возвращена в библиотеку!');
+                    }
+                }
+                else if (e.target.classList.contains('extend-btn')) {
+                    alert('Срок аренды продлен на 7 дней!');
+                }
+            });
+        });
+
+        // Функция для плавного перехода между страницами
+        function smoothNavigate(url) {
+            document.body.classList.add('page-exit');
+            setTimeout(() => {
+                window.location.href = url;
+            }, 400);
+        }
+
+        // Обработчик для всех внутренних ссылок
+        document.addEventListener('DOMContentLoaded', function() {
+            const allLinks = document.querySelectorAll('a[href]');
+
+            allLinks.forEach(link => {
+                const href = link.getAttribute('href');
+
+                if (href &&
+                    !href.startsWith('http') &&
+                    !href.startsWith('//') &&
+                    !href.startsWith('#') &&
+                    !href.startsWith('javascript:') &&
+                    (href.endsWith('.html') || href === 'index.html' || href === '/')) {
+
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        smoothNavigate(href);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
